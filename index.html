@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img src="./assets/Composition-vs-Inheritance.jpg" alt="Composition-vs-Inheritance" >
+				</section>
+				<section>
+					<section>
+						<pre>
+							<code>
+								class Character {
+									constructor(name, weapon) {
+										this.name = name;
+										this.weapon = weapon;
+									}
+								
+									attack() {
+										return 'atack with ' + this.weapon
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>We have Elf and Ogre that extended the functionality of Character</p>
+						<pre>
+							<code>
+								class Elf extends Character {
+									constructor(name, weapon, type) {
+										super(name, weapon)
+										console.log('what am i?', this);
+										this.type = type;
+									}
+								}
+								
+								class Ogre extends Character {
+									constructor(name, weapon, color){
+										super(name, weapon);
+										this.color = color;
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					
+				</section>
+				<section>
+					<pre>
+						<code data-line-numbers="10-12">
+							class Character {
+								constructor(name, weapon) {
+									this.name = name;
+									this.weapon = weapon;
+								}
+								attack() {
+									return 'atack with ' + this.weapon
+								}
+								sleep() {
+
+								}
+							}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<section>
+						<pre>
+							<code>
+								function Elf(name, weapon, type){
+									let elf = {
+										name,
+										weapon,
+										type
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code>
+								function getAttack(character) {
+									return Object.assign({}, character, {attackFn: () => {}})
+								}
+								function Elf(name, weapon, type){
+									let elf = {
+										name,
+										weapon,
+										type
+									}
+									return getAttack(elf)
+								}
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<img src="./assets/inheritance.png" alt="Composition-vs-Inheritance" >
+				</section>
+				<section>
+					<img src="./assets/composition.png" alt="Composition-vs-Inheritance" >
+				</section>
+				<section>
+					<p>Thanks for whatching</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
